@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search</title>
+</head>
+<body>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit">Search</button>
+</form>
+
+{% if images %}
+  <h4>Found images</h4>
+  {% for img in images %}
+    <img style="width: 200px;" src="{{ img }}">
+  {% endfor %}
+{% endif %}
+
+
+
+</body>
+</html>
