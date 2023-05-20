@@ -6,20 +6,37 @@
 </head>
 <body>
 
-<form method="post">
-  {% csrf_token %}
-  {{ form }}
-  <button type="submit">Search</button>
-</form>
+{% if not user.is_authenticated %}
+  <a href="{% url 'login' %}">Log in</a>
+  <a href="{% url 'signup' %}">Sign up</a>
+{% else %}
+  <a href="{% url 'list' %}">Our pictures</a>
+{% endif %}
+<p></p>
+
+<p></p>
+
+{% if user.is_authenticated %}
+  <form action="{% url 'download' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Search</button>
+  </form>
+{% else %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Search</button>
+  </form>  
+{% endif %}
+<p></p>
 
 {% if images %}
-  <h4>Found images</h4>
+  <h4>Found pictures</h4>
   {% for img in images %}
     <img style="width: 200px;" src="{{ img }}">
   {% endfor %}
 {% endif %}
-
-
 
 </body>
 </html>

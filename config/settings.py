@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'search_img'
+    'search_img',
+    'account'
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,6 @@ import os
 load_dotenv()  # loads the configs from .env
 
 UNSPLASH_ACCESS_KEY = str(os.getenv('UNSPLASH_ACCESS_KEY'))
+
+LOGIN_REDIRECT_URL = '/'
+
