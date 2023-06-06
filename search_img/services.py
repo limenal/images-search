@@ -35,7 +35,7 @@ async def download_file(user_id: int, url: str, query: str) -> None:
     await Image.objects.acreate(title=query, url=file_name, user_id=user_id)
 
 
-async def save_images(user_id: int, query: str, count: int) -> list:
+async def save_images(user_id: int, query: str, count: int) -> List[str]:
     link_images = await search_image(query, count)
     await asyncio.gather(
         *(download_file(user_id, url, query) for url in link_images),
