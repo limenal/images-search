@@ -4,7 +4,7 @@ import aiofiles
 
 from config.settings import UNSPLASH_ACCESS_KEY
 from .models import Image
-
+from typing import List
 
 async def get_link(query: str, current_page: int) -> str:
     headers = {'Authorization': f'Client-ID {UNSPLASH_ACCESS_KEY}'}
@@ -17,7 +17,7 @@ async def get_link(query: str, current_page: int) -> str:
             response = res.json()
             return response.get('results')[0].get('urls').get('raw')
 
-async def search_image(query: str, count: int) -> list:
+async def search_image(query: str, count: int) -> List[str]:
     current_page = 0
     images = await asyncio.gather(
         *(get_link(query, count) for count in range(current_page, count)),
